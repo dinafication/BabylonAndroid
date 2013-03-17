@@ -88,15 +88,15 @@ public class MainFragment extends Fragment{
 			lng.Name = "Language to learn";
 
 			GroupItemEntity eng2 = myLng.new GroupItemEntity();
-			eng2.Name = "ENGLISH";
+			eng2.Name = "German";
 			lng.GroupItemCollection.add(eng2);
 
 			GroupItemEntity ger2 = myLng.new GroupItemEntity();
-			ger2.Name = "GERMAN";
+			ger2.Name = "French";
 			lng.GroupItemCollection.add(ger2);
 
 			GroupItemEntity tal2 = myLng.new GroupItemEntity();
-			tal2.Name = "TALIAN";
+			tal2.Name = "Italian";
 			lng.GroupItemCollection.add(tal2);
 
 			mGroupCollection.add(lng);

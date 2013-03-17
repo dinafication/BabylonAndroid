@@ -52,6 +52,6 @@
          android:background="#0000"
         android:onClick="btnPlayOnClck"
         android:text="Play" 
-        android:textColor="#00dfff" />
+        android:textColor="#56E8DC" />
 
 </RelativeLayout>

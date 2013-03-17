@@ -15,21 +15,21 @@
     
     <style name="textVeci">
         <item name="android:text">ExpandableListView Sample</item>
-        <item name="android:textColor">#57820f</item>
+        <item name="android:textColor">#57E964</item>
         <item name="android:textSize">18dip</item>
         <item name="android:textStyle">bold</item>
     </style>
     
     <style name="textManji">
         <item name="android:text">ExpandableListView Sample</item>
-        <item name="android:textColor">#57810f</item>
+        <item name="android:textColor">#56E893</item>
         <item name="android:textSize">14dip</item>
 <!--         <item name ="android:background">#0f00ff</item> -->
     </style>
     
     
     <style name="bckGrnd">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#000000</item>
     </style>
 
 </resources>
