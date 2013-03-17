@@ -66,64 +66,64 @@ public class MainFragment extends Fragment{
 			// }
 
 			// moj jezik
-			GroupEntity myLng = new GroupEntity();
-			myLng.Name = "My language";
-
-			GroupItemEntity eng = myLng.new GroupItemEntity();
-			eng.Name = "German";
-			myLng.GroupItemCollection.add(eng);
-
-			GroupItemEntity ger = myLng.new GroupItemEntity();
-			ger.Name = "Italian";
-			myLng.GroupItemCollection.add(ger);
-
-			GroupItemEntity tal = myLng.new GroupItemEntity();
-			tal.Name = "French";
-			myLng.GroupItemCollection.add(tal);
-
-			mGroupCollection.add(myLng);
+//			GroupEntity myLng = new GroupEntity();
+//			myLng.Name = "My language";
+//
+//			GroupItemEntity eng = myLng.new GroupItemEntity();
+//			eng.Name = "German";
+//			myLng.GroupItemCollection.add(eng);
+//
+//			GroupItemEntity ger = myLng.new GroupItemEntity();
+//			ger.Name = "Italian";
+//			myLng.GroupItemCollection.add(ger);
+//
+//			GroupItemEntity tal = myLng.new GroupItemEntity();
+//			tal.Name = "French";
+//			myLng.GroupItemCollection.add(tal);
+//
+//			mGroupCollection.add(myLng);
 
 			// jezik za ucenje
 			GroupEntity lng = new GroupEntity();
-			lng.Name = "Language to learn";
+			lng.Name = "Language ";
 
-			GroupItemEntity eng2 = myLng.new GroupItemEntity();
+			GroupItemEntity eng2 = lng.new GroupItemEntity();
 			eng2.Name = "German";
 			lng.GroupItemCollection.add(eng2);
 
-			GroupItemEntity ger2 = myLng.new GroupItemEntity();
+			GroupItemEntity ger2 = lng.new GroupItemEntity();
 			ger2.Name = "French";
 			lng.GroupItemCollection.add(ger2);
 
-			GroupItemEntity tal2 = myLng.new GroupItemEntity();
+			GroupItemEntity tal2 = lng.new GroupItemEntity();
 			tal2.Name = "Italian";
 			lng.GroupItemCollection.add(tal2);
 
 			mGroupCollection.add(lng);
 
 			// game
-			GroupEntity gm = new GroupEntity();
-			gm.Name = "Game";
-
-			GroupItemEntity syn = myLng.new GroupItemEntity();
-			syn.Name = "Synonyms";
-			gm.GroupItemCollection.add(syn);
-
-			GroupItemEntity trn = myLng.new GroupItemEntity();
-			trn.Name = "Translation";
-			gm.GroupItemCollection.add(trn);
-
-			mGroupCollection.add(gm);
+//			GroupEntity gm = new GroupEntity();
+//			gm.Name = "Game";
+//
+//			GroupItemEntity syn = myLng.new GroupItemEntity();
+//			syn.Name = "Synonyms";
+//			gm.GroupItemCollection.add(syn);
+//
+//			GroupItemEntity trn = myLng.new GroupItemEntity();
+//			trn.Name = "Translation";
+//			gm.GroupItemCollection.add(trn);
+//
+//			mGroupCollection.add(gm);
 
 			// level
 			GroupEntity lvl = new GroupEntity();
 			lvl.Name = "Level";
 
-			GroupItemEntity a1 = myLng.new GroupItemEntity();
+			GroupItemEntity a1 = lvl.new GroupItemEntity();
 			a1.Name = "A1";
 			lvl.GroupItemCollection.add(a1);
 
-			GroupItemEntity a2 = myLng.new GroupItemEntity();
+			GroupItemEntity a2 = lvl.new GroupItemEntity();
 			a2.Name = "A2";
 			lvl.GroupItemCollection.add(a2);
 

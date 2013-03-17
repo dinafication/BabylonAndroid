@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btnTocno"
         android:layout_toRightOf="@+id/btnShow"
+        android:background="#000000"
         android:onClick="onClckKrivo"
         android:src="@drawable/krivo1" />
 
