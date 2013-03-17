@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <string name="app_name">Babylon</string>
+    <string name="country_prompt">Choose a language</string>
+ 
+    <string-array name="language_arrays">
+        <item>German</item>
+        <item>Italian</item>
+        <item>French</item>
+    </string-array>
+ 
+</resources>

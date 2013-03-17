@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Babylon</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="title_activity_main">Babylon</string>
+    <string name="title_activity_play">PlayActivity</string>
+    
+    <string name="title_activity_finish">FinishActivity</string>
+    <string name="btnMyStats">My statistic</string>
+    
+
+</resources>

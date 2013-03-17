@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:text="word1"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnTocno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60dp"
+         android:layout_marginLeft="60dp"
+        android:text="Tocno"
+        android:onClick="onClckTocno"
+         />
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/question"
+        android:layout_below="@+id/question"
+        android:layout_marginTop="62dp"
+        android:background="#0000"
+        android:onClick="onClckShow"
+        android:text="Show ?"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+
+    <ImageButton
+        android:id="@+id/btnKrivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnTocno"
+        android:layout_toRightOf="@+id/btnShow"
+        android:onClick="onClckKrivo"
+        android:src="@drawable/krivo1" />
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/bckGrnd" >
+
+
+<!-- lista -->
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="50dp"
+        android:groupIndicator="@drawable/play_expand_background"
+        android:listSelector="@drawable/play_expand_seletor"
+        android:scrollbars="none" >
+    </ExpandableListView>
+
+   
+
+<!--     <Spinner -->
+<!--         android:id="@+id/lng" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignParentTop="true" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_marginTop="100dp" -->
+<!--         android:background="#0000" -->
+<!--         android:entries="@array/language_arrays" -->
+<!--         android:textColor="#00dfff" /> -->
+
+<!--     <Button -->
+<!--         android:id="@+id/level" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_alignParentTop="true" -->
+<!--         android:layout_marginTop="200dp" -->
+<!--         android:background="#0000" -->
+<!--         android:onClick="btnLevelOnClck" -->
+<!--         android:text="Level" -->
+<!--         android:textColor="#00dfff" /> -->
+    
+     <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="88dp"
+         android:background="#0000"
+        android:onClick="btnPlayOnClck"
+        android:text="Play" 
+        android:textColor="#00dfff" />
+
+</RelativeLayout>

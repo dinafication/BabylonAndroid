@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/questionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:text="question" />
+
+    <RadioGroup
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/questionTxt"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true" >
+
+        <RadioButton
+            android:id="@+id/radio_a1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:onClick="onRadioButtonClicked"
+            android:layout_centerHorizontal="true"
+            android:text="a1" />
+
+        <RadioButton
+            android:id="@+id/radio_a2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radio_a1"
+            android:layout_below="@+id/radio_a1"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="a2" />
+
+        <RadioButton
+            android:id="@+id/radio_a3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radio_a2"
+            android:layout_below="@+id/radio_a2"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="a3" />
+    </RadioGroup>
+
+</RelativeLayout>
