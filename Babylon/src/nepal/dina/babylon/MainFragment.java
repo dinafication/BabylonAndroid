@@ -188,6 +188,8 @@ public class MainFragment extends Fragment{
 					if(groupPosition == 1){
 						level = childPosition;
 					}
+					
+					((MainActivity) getActivity()).fetchQuestions();
 					return false;
 				}
 			});

@@ -219,7 +219,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		instantiateQuestion();
 	}
 
-	private void fetchQuestions() {
+	public void fetchQuestions() {
 
 		myDbHelper.openDataBase();
 		
@@ -233,6 +233,7 @@ public class MainActivity extends SherlockFragmentActivity {
 			level = Mapper.getLanguage(mainFragment.level);
 		}
 		ret = myDbHelper.getQuestions(language, level, "100");
+		
 		myDbHelper.closeDataBase();
 	}
 	
