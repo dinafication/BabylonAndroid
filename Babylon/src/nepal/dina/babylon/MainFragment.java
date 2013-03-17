@@ -29,9 +29,15 @@ public class MainFragment extends Fragment{
 	
 	 View view;
 
+	 private int  lastExpandedGroupIndx  = 100;
+	 
+	 
 	  @Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	      Bundle savedInstanceState) {
+		  
+		 
+		  
 		  
 	    view = inflater.inflate(R.layout.fragment_main,
 	        container, false);
@@ -64,15 +70,15 @@ public class MainFragment extends Fragment{
 			myLng.Name = "My language";
 
 			GroupItemEntity eng = myLng.new GroupItemEntity();
-			eng.Name = "ENGLISH";
+			eng.Name = "German";
 			myLng.GroupItemCollection.add(eng);
 
 			GroupItemEntity ger = myLng.new GroupItemEntity();
-			ger.Name = "GERMAN";
+			ger.Name = "Italian";
 			myLng.GroupItemCollection.add(ger);
 
 			GroupItemEntity tal = myLng.new GroupItemEntity();
-			tal.Name = "Talian";
+			tal.Name = "French";
 			myLng.GroupItemCollection.add(tal);
 
 			mGroupCollection.add(myLng);
@@ -134,6 +140,21 @@ public class MainFragment extends Fragment{
 					mExpandableListView, mGroupCollection);
 
 			mExpandableListView.setAdapter(adapter);
+			
+			mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+				
+				@Override
+				public void onGroupExpand(int groupPosition) {
+					
+					if(lastExpandedGroupIndx < 5){
+						
+						mExpandableListView.collapseGroup(lastExpandedGroupIndx);
+						
+					}
+					
+					lastExpandedGroupIndx = groupPosition;
+				}
+			});
 
 		  
 

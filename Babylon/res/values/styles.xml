@@ -29,7 +29,7 @@
     
     
     <style name="bckGrnd">
-        <item name="android:background">#6D7B8D</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
 </resources>
