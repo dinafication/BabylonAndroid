@@ -30,6 +30,8 @@ public class MainFragment extends Fragment{
 	 View view;
 
 	 private int  lastExpandedGroupIndx  = 100;
+	 public int language  = 100;
+	 public int level = 100;
 	 
 	 
 	  @Override
@@ -98,6 +100,10 @@ public class MainFragment extends Fragment{
 			GroupItemEntity tal2 = lng.new GroupItemEntity();
 			tal2.Name = "Italian";
 			lng.GroupItemCollection.add(tal2);
+			
+			GroupItemEntity span = lng.new GroupItemEntity();
+			span.Name = "Spanish";
+			lng.GroupItemCollection.add(span);
 
 			mGroupCollection.add(lng);
 
@@ -119,13 +125,25 @@ public class MainFragment extends Fragment{
 			GroupEntity lvl = new GroupEntity();
 			lvl.Name = "Level";
 
-			GroupItemEntity a1 = lvl.new GroupItemEntity();
-			a1.Name = "A1";
-			lvl.GroupItemCollection.add(a1);
+			GroupItemEntity e = lvl.new GroupItemEntity();
+			e.Name = "Elementary";
+			lvl.GroupItemCollection.add(e);
+			
+			GroupItemEntity pi = lvl.new GroupItemEntity();
+			pi.Name = "Pre-intermediate";
+			lvl.GroupItemCollection.add(pi);
 
-			GroupItemEntity a2 = lvl.new GroupItemEntity();
-			a2.Name = "A2";
-			lvl.GroupItemCollection.add(a2);
+			GroupItemEntity i = lvl.new GroupItemEntity();
+			i.Name = "Intermediate";
+			lvl.GroupItemCollection.add(i);
+			
+			GroupItemEntity ui = lvl.new GroupItemEntity();
+			ui.Name = "Upper-intermediate";
+			lvl.GroupItemCollection.add(ui);
+			
+			GroupItemEntity ad = lvl.new GroupItemEntity();
+			ad.Name = "Advanced";
+			lvl.GroupItemCollection.add(ad);
 
 			mGroupCollection.add(lvl);
 
@@ -156,7 +174,23 @@ public class MainFragment extends Fragment{
 				}
 			});
 
-		  
+			mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+				
+				@Override
+				public boolean onChildClick(ExpandableListView parent, View v,
+						int groupPosition, int childPosition, long id) {
+					
+					// language
+					if(groupPosition == 0){
+						language = childPosition;
+					}
+					// lEVEL
+					if(groupPosition == 1){
+						level = childPosition;
+					}
+					return false;
+				}
+			});
 
 	  }
 	  

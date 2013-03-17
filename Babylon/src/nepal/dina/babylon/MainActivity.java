@@ -222,8 +222,38 @@ public class MainActivity extends SherlockFragmentActivity {
 	private void fetchQuestions() {
 
 		myDbHelper.openDataBase();
-		ret = myDbHelper.getQuestions("ger", "I", "100");
+		
+		String language = "ger";
+		if(mainFragment.language < 100){
+			language = Mapper.getLanguage(mainFragment.language);
+		}
+		
+		String level = "A";
+		if(mainFragment.level < 100){
+			level = Mapper.getLanguage(mainFragment.level);
+		}
+		ret = myDbHelper.getQuestions(language, level, "100");
 		myDbHelper.closeDataBase();
+	}
+	
+	
+	enum Mapper{
+		GERMAN, FRENCH, ITALIAN;
+		
+		public static String getLevel(int indx){
+			if(indx == 0)return "E";
+			if(indx == 1)return "PI";
+			if(indx == 2)return "I";
+			if(indx == 2)return "UI";
+			else return "A";
+		}
+		
+		public static String getLanguage(int indx){
+			if(indx == 0)return "ger";
+			if(indx == 1)return "fra";
+			if(indx == 2)return "tal";
+			else return "span";
+		}
 	}
 
 }
