@@ -16,7 +16,7 @@
     <style name="textVeci">
         <item name="android:text">ExpandableListView Sample</item>
         <item name="android:textColor">#57E964</item>
-        <item name="android:textSize">28dip</item>
+        <item name="android:textSize">24dip</item>
         <item name="android:textStyle">bold</item>
     </style>
     
