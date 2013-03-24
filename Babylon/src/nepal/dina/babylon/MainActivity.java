@@ -118,7 +118,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		try {
 			myDbHelper = new DataBaseHelper(this);
 			myDbHelper.createDataBase();
-			fetchQuestions();
+			//fetchQuestions();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -170,9 +170,6 @@ public class MainActivity extends SherlockFragmentActivity {
 //
 //	}
 
-	public void btnLngOnClck(View view) {
-
-	}
 
 	public void btnPlayOnClck(View view) {
 
@@ -199,6 +196,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	public void instantiateQuestion() {
 
+		fetchQuestions();
 		String s = ret.get(numAll).getQ();
 		((TextView) findViewById(R.id.question)).setText(s);
 
@@ -224,14 +222,9 @@ public class MainActivity extends SherlockFragmentActivity {
 		myDbHelper.openDataBase();
 		
 		String language = "ger";
-		if(mainFragment.language < 100){
-			language = Mapper.getLanguage(mainFragment.language);
-		}
+		
 		
 		String level = "A";
-		if(mainFragment.level < 100){
-			level = Mapper.getLanguage(mainFragment.level);
-		}
 		ret = myDbHelper.getQuestions(language, level, "100");
 		
 		myDbHelper.closeDataBase();

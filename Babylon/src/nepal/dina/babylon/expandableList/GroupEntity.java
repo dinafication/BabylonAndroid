@@ -10,6 +10,8 @@ public class GroupEntity {
 	public GroupEntity()
 	{
 		GroupItemCollection = new ArrayList<GroupItemEntity>();
+		
+		
 	}
 
 	public class GroupItemEntity

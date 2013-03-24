@@ -14,7 +14,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -24,14 +27,16 @@ import android.support.v4.app.FragmentTransaction;
 
 public class MainFragment extends Fragment{
 	
-	private ExpandableListView mExpandableListView;
+	public ExpandableListView mExpandableListView;
+	public ExpandableListAdapter adapter;
 	private List<GroupEntity> mGroupCollection;
 	
 	 View view;
 
 	 private int  lastExpandedGroupIndx  = 100;
-	 public int language  = 100;
-	 public int level = 100;
+	 
+	 
+	 private GroupEntity lng;
 	 
 	 
 	  @Override
@@ -86,7 +91,7 @@ public class MainFragment extends Fragment{
 //			mGroupCollection.add(myLng);
 
 			// jezik za ucenje
-			GroupEntity lng = new GroupEntity();
+			lng = new GroupEntity();
 			lng.Name = "Language ";
 
 			GroupItemEntity eng2 = lng.new GroupItemEntity();
@@ -154,7 +159,7 @@ public class MainFragment extends Fragment{
 		  
 		  // za listu
 			mExpandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-			ExpandableListAdapter adapter = new ExpandableListAdapter(getActivity(),
+			adapter = new ExpandableListAdapter(getActivity(),
 					mExpandableListView, mGroupCollection);
 
 			mExpandableListView.setAdapter(adapter);
@@ -164,7 +169,7 @@ public class MainFragment extends Fragment{
 				@Override
 				public void onGroupExpand(int groupPosition) {
 					
-					if(lastExpandedGroupIndx < 5){
+					if(lastExpandedGroupIndx < 5 && lastExpandedGroupIndx  != groupPosition){
 						
 						mExpandableListView.collapseGroup(lastExpandedGroupIndx);
 						
@@ -173,27 +178,19 @@ public class MainFragment extends Fragment{
 					lastExpandedGroupIndx = groupPosition;
 				}
 			});
-
-			mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 				
 				@Override
 				public boolean onChildClick(ExpandableListView parent, View v,
 						int groupPosition, int childPosition, long id) {
 					
-					// language
-					if(groupPosition == 0){
-						language = childPosition;
-					}
-					// lEVEL
-					if(groupPosition == 1){
-						level = childPosition;
-					}
+					//
 					
 					((MainActivity) getActivity()).fetchQuestions();
-					return false;
+					return true;
 				}
 			});
-
+	
 	  }
 	  
 	 

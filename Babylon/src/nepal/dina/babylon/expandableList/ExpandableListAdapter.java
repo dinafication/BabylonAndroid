@@ -3,6 +3,7 @@ package nepal.dina.babylon.expandableList;
 
 import java.util.List;
 
+import nepal.dina.babylon.MainActivity;
 import nepal.dina.babylon.R;
 import nepal.dina.babylon.expandableList.GroupEntity;
 
@@ -25,6 +26,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	private ExpandableListView mExpandableListView;
 	private List<GroupEntity> mGroupCollection;
 	private int[] groupStatus;
+	
+	
 
 	public ExpandableListAdapter(Context pContext,
 			ExpandableListView pExpandableListView,
@@ -63,7 +66,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 				parent.collapseGroup(groupPosition);
 				mExpandableListView.collapseGroup(groupPosition);
-				return false;
+				return true;
 			}
 		});
 	}
@@ -82,7 +85,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			ViewGroup arg4) {
 		// TODO Auto-generated method stub
 
-		ChildHolder childHolder;
+		final ChildHolder childHolder;
 		if (arg3 == null) {
 			arg3 = LayoutInflater.from(mContext).inflate(
 					R.layout.list_group_item, null);
@@ -101,12 +104,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			
 			public void onClick(View v) {
 				mExpandableListView.collapseGroup(arg0);
+				//TODO
+				
 				
 			}
 		});
 		
 		return arg3;
 	}
+	
+	
 
 	public int getChildrenCount(int arg0) {
 		// TODO Auto-generated method stub
