@@ -38,6 +38,8 @@ public class MainFragment extends Fragment{
 	 
 	 private GroupEntity lng;
 	 
+	 public String language;
+	 
 	 
 	  @Override
 	  public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -178,20 +180,21 @@ public class MainFragment extends Fragment{
 					lastExpandedGroupIndx = groupPosition;
 				}
 			});
-	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-				
-				@Override
-				public boolean onChildClick(ExpandableListView parent, View v,
-						int groupPosition, int childPosition, long id) {
-					
-					//
-					
-					((MainActivity) getActivity()).fetchQuestions();
-					return true;
-				}
-			});
-	
+//	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//				
+//				@Override
+//				public boolean onChildClick(ExpandableListView parent, View v,
+//						int groupPosition, int childPosition, long id) {
+//					
+//					//
+//					
+//					((MainActivity) getActivity()).fetchQuestions(adapter.language, adapter.level);
+//					return true;
+//				}
+//			});
+//	
 	  }
 	  
-	 
+
+
 }

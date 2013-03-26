@@ -4,6 +4,7 @@ package nepal.dina.babylon.expandableList;
 import java.util.List;
 
 import nepal.dina.babylon.MainActivity;
+import nepal.dina.babylon.MainFragment;
 import nepal.dina.babylon.R;
 import nepal.dina.babylon.expandableList.GroupEntity;
 
@@ -27,6 +28,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	private List<GroupEntity> mGroupCollection;
 	private int[] groupStatus;
 	
+	public String level;
+	public String language;
+	
 	
 
 	public ExpandableListAdapter(Context pContext,
@@ -38,6 +42,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		groupStatus = new int[mGroupCollection.size()];
 
 		setListEvent();
+		
 	}
 
 	private void setListEvent() {
@@ -81,7 +86,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		return 0;
 	}
 
-	public View getChildView(final int arg0, int arg1, boolean arg2, View arg3,
+	public View getChildView(final int arg0, final int arg1, boolean arg2, View arg3,
 			ViewGroup arg4) {
 		// TODO Auto-generated method stub
 
@@ -105,6 +110,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			public void onClick(View v) {
 				mExpandableListView.collapseGroup(arg0);
 				//TODO
+				if(arg0==0){
+					
+					((MainActivity)mContext).language = mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+				}
+				else{
+					((MainActivity)mContext).level = mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+				}
 				
 				
 			}

@@ -73,6 +73,11 @@ public class MainActivity extends SherlockFragmentActivity {
 	Tab main;
 	Tab play;
 	Tab stats;
+	
+	public  String language;
+	public  String level;
+	
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -173,6 +178,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	public void btnPlayOnClck(View view) {
 
+		fetchQuestions();
 		getSupportActionBar().selectTab(play);
 
 	}
@@ -196,7 +202,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	public void instantiateQuestion() {
 
-		fetchQuestions();
+		//fetchQuestions();
 		String s = ret.get(numAll).getQ();
 		((TextView) findViewById(R.id.question)).setText(s);
 
@@ -221,11 +227,8 @@ public class MainActivity extends SherlockFragmentActivity {
 
 		myDbHelper.openDataBase();
 		
-		String language = "ger";
 		
-		
-		String level = "A";
-		ret = myDbHelper.getQuestions(language, level, "100");
+		ret = myDbHelper.getQuestions(Mapper.getLanguage(language), Mapper.getLevel(level), "100");
 		
 		myDbHelper.closeDataBase();
 	}
