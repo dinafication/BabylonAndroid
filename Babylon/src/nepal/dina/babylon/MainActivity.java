@@ -228,7 +228,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		myDbHelper.openDataBase();
 		
 		
-		ret = myDbHelper.getQuestions(Mapper.getLanguage(language), Mapper.getLevel(level), "100");
+		ret = myDbHelper.getQuestions(language,level, "100");
 		
 		myDbHelper.closeDataBase();
 	}

@@ -180,19 +180,25 @@ public class MainFragment extends Fragment{
 					lastExpandedGroupIndx = groupPosition;
 				}
 			});
-//	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//				
-//				@Override
-//				public boolean onChildClick(ExpandableListView parent, View v,
-//						int groupPosition, int childPosition, long id) {
-//					
-//					//
-//					
-//					((MainActivity) getActivity()).fetchQuestions(adapter.language, adapter.level);
-//					return true;
-//				}
-//			});
-//	
+	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+				
+				@Override
+				public boolean onChildClick(ExpandableListView parent, View v,
+						int groupPosition, int childPosition, long id) {
+					
+					if(groupPosition == 0){
+						((MainActivity) getActivity()).language = Mapper.getLanguage(childPosition);
+					}
+					
+					if(groupPosition == 1){
+						((MainActivity) getActivity()).level = Mapper.getLevel(childPosition);
+					}
+					
+					mExpandableListView.collapseGroup(groupPosition);
+					return true;
+				}
+			});
+	
 	  }
 	  
 

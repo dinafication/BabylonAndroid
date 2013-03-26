@@ -5,6 +5,7 @@ import java.util.List;
 
 import nepal.dina.babylon.MainActivity;
 import nepal.dina.babylon.MainFragment;
+import nepal.dina.babylon.Mapper;
 import nepal.dina.babylon.R;
 import nepal.dina.babylon.expandableList.GroupEntity;
 
@@ -98,6 +99,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			childHolder = new ChildHolder();
 
 			childHolder.title = (TextView) arg3.findViewById(R.id.item_title);
+			
+			//((TextView)childHolder.title).set
 			arg3.setTag(childHolder);
 		}else {
 			childHolder = (ChildHolder) arg3.getTag();
@@ -111,11 +114,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 				mExpandableListView.collapseGroup(arg0);
 				//TODO
 				if(arg0==0){
-					
-					((MainActivity)mContext).language = mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					((MainActivity)mContext).language = Mapper.getLanguage(s);
 				}
 				else{
-					((MainActivity)mContext).level = mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					((MainActivity)mContext).level =  Mapper.getLevel(s);
 				}
 				
 				
