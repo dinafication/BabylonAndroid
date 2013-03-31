@@ -180,6 +180,8 @@ public class MainFragment extends Fragment{
 					lastExpandedGroupIndx = groupPosition;
 				}
 			});
+			
+			// U biti se ne koristi, jer je view prosiren preko cijele sirine, ostavljen za svaki slucaj
 	mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 				
 				@Override

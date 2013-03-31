@@ -95,6 +95,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		if (arg3 == null) {
 			arg3 = LayoutInflater.from(mContext).inflate(
 					R.layout.list_group_item, null);
+			
+			
 
 			childHolder = new ChildHolder();
 
@@ -116,6 +118,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 				if(arg0==0){
 					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
 					((MainActivity)mContext).language = Mapper.getLanguage(s);
+					
+					((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
 				}
 				else{
 					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
@@ -123,6 +127,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 				}
 				
 				
+//				
+//				GroupHolder groupHolder = (GroupHolder) (LayoutInflater.from(mContext).inflate(
+//						R.layout.list_group_item, null)).getTag();
+//				groupHolder.title.setText("novi");
 			}
 		});
 		
