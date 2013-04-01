@@ -126,11 +126,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 					((MainActivity)mContext).level =  Mapper.getLevel(s);
 				}
 				
-				
-//				
-//				GroupHolder groupHolder = (GroupHolder) (LayoutInflater.from(mContext).inflate(
-//						R.layout.list_group_item, null)).getTag();
-//				groupHolder.title.setText("novi");
+			
 			}
 		});
 		
