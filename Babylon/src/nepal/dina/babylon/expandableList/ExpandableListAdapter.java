@@ -32,6 +32,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 	
 	public String level;
 	public String language;
+	private int slected;
 	
 	
 
@@ -44,6 +45,8 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 		groupStatus = new int[mGroupCollection.size()];
 
 		setListEvent();
+		
+		slected = R.drawable.group_up;
 		
 	}
 
@@ -126,7 +129,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 					
 					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
 					
-					((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setImageResource(R.drawable.lng_btn1_bck);
+					((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
 					
 				}
 				else{
@@ -134,7 +137,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 					((MainActivity)mContext).level =  Mapper.getLevel(s);
 				}
 				
-			
+				slected = R.drawable.group_up;
 			}
 		});
 		
@@ -171,24 +174,26 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 					null);
 			groupHolder = new GroupHolder();
 			groupHolder.img = (ImageView) arg2.findViewById(R.id.tag_img);
-			groupHolder.title = (TextView) arg2.findViewById(R.id.group_title);
+			groupHolder.title = (ImageView) arg2.findViewById(R.id.group_title);
 			arg2.setTag(groupHolder);
 		} else {
 			groupHolder = (GroupHolder) arg2.getTag();
 		}
 		if (groupStatus[arg0] == 0) {
-			groupHolder.img.setImageResource(R.drawable.group_down);
+			groupHolder.img.setImageResource(slected);
 		} else {
-			groupHolder.img.setImageResource(R.drawable.group_up);
+			groupHolder.img.setImageResource(slected);
 		}
-		groupHolder.title.setText(mGroupCollection.get(arg0).Name);
+		groupHolder.title.setImageResource(slected);
+		
+		slected = R.drawable.group_down;
 
 		return arg2;
 	}
 
 	class GroupHolder {
 		ImageView img;
-		TextView title;
+		ImageView title;
 	}
 
 	class ChildHolder {
