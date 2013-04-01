@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     style="@style/bckGrnd" >
@@ -64,8 +64,7 @@
          android:layout_alignParentLeft="true"
          android:layout_marginBottom="12dp"
          android:layout_marginLeft="66dp"
-         android:background="#000000"
-         android:layout_toLeftOf="@+id/button1"
+         android:background="@android:color/transparent" 
          android:src="@drawable/group_play4"
          android:onClick="btnPlayOnClck" />
 

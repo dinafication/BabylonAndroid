@@ -22,7 +22,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dip"
         android:text=""
-         android:focusable="false"
+        android:focusable="false"
         style="@style/textVeci"/>
 
 </RelativeLayout>

@@ -30,7 +30,7 @@
     
     
     <style name="bckGrnd">
-        <item name="android:background">#000000</item>
+       <item name="android:background">@drawable/bckgrnd1</item>
     </style>
 
 </resources>

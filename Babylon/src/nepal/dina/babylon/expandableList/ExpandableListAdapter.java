@@ -18,11 +18,12 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 
 	private Context mContext;
 	private ExpandableListView mExpandableListView;
@@ -88,7 +89,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	}
 
 	public View getChildView(final int arg0, final int arg1, boolean arg2, View arg3,
-			ViewGroup arg4) {
+			final ViewGroup arg4) {
 		// TODO Auto-generated method stub
 
 		final ChildHolder childHolder;
@@ -119,7 +120,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
 					((MainActivity)mContext).language = Mapper.getLanguage(s);
 					
-					((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
+					//((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
+					
+					//((RelativeLayout) getGroupView(0, true, null, null)).setBackgroundResource(R.drawable.lng_btn1_bck);
+					
+					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
+					
+					((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setImageResource(R.drawable.lng_btn1_bck);
+					
 				}
 				else{
 					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
@@ -155,7 +163,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		return arg0;
 	}
 
-	public View getGroupView(int arg0, boolean arg1, View arg2, ViewGroup arg3) {
+	public View getGroupView(int arg0, boolean arg1, View arg2,  ViewGroup arg3) {
 		// TODO Auto-generated method stub
 		GroupHolder groupHolder;
 		if (arg2 == null) {
