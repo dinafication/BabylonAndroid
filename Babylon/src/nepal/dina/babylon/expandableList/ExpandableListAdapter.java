@@ -20,6 +20,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
@@ -107,6 +108,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 			childHolder = new ChildHolder();
 
 			childHolder.title = (ImageView) arg3.findViewById(R.id.item_title);
+			childHolder.groupItem = (LinearLayout) arg3.findViewById(R.id.groupItem);
 			
 			//((TextView)childHolder.title).set
 			arg3.setTag(childHolder);
@@ -115,6 +117,37 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 		}
 
 		childHolder.title.setImageResource(ResourceMapper.getResource(arg0, arg1).getChildDrawable()); // Text(mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name);
+		
+		childHolder.groupItem.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mExpandableListView.collapseGroup(arg0);
+				//TODO
+				if(arg0==0){
+					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					((MainActivity)mContext).language = Mapper.getLanguage(s);
+					
+					//((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
+					
+					//((RelativeLayout) getGroupView(0, true, null, null)).setBackgroundResource(R.drawable.lng_btn1_bck);
+					
+					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
+					
+					
+					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
+					
+					
+				}
+				else{
+					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+					((MainActivity)mContext).level =  Mapper.getLevel(s);
+				}
+				selected = ResourceMapper.getResource(arg0, arg1);
+				//slected = R.drawable.group_up;
+				
+			}
+		});
 		
 		childHolder.title.setOnClickListener(new OnClickListener() {
 			
@@ -202,6 +235,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 	}
 
 	class ChildHolder {
+		LinearLayout groupItem;
 		ImageView title;
 	}
 
