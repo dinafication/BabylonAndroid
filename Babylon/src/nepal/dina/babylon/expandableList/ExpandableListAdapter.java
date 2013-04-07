@@ -7,6 +7,8 @@ import nepal.dina.babylon.MainActivity;
 import nepal.dina.babylon.MainFragment;
 import nepal.dina.babylon.Mapper;
 import nepal.dina.babylon.R;
+import nepal.dina.babylon.ResourceMapper;
+import nepal.dina.babylon.ResourceMapper.Resource;
 import nepal.dina.babylon.expandableList.GroupEntity;
 
 import android.content.Context;
@@ -28,11 +30,11 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 	private Context mContext;
 	private ExpandableListView mExpandableListView;
 	private List<GroupEntity> mGroupCollection;
-	private int[] groupStatus;
+	public int[] groupStatus;
 	
 	public String level;
 	public String language;
-	private int slected;
+	private Resource selected;
 	
 	
 
@@ -46,7 +48,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 
 		setListEvent();
 		
-		slected = R.drawable.group_up;
+		selected = Resource.LVL;
 		
 	}
 
@@ -104,7 +106,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 
 			childHolder = new ChildHolder();
 
-			childHolder.title = (TextView) arg3.findViewById(R.id.item_title);
+			childHolder.title = (ImageView) arg3.findViewById(R.id.item_title);
 			
 			//((TextView)childHolder.title).set
 			arg3.setTag(childHolder);
@@ -112,7 +114,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 			childHolder = (ChildHolder) arg3.getTag();
 		}
 
-		childHolder.title.setText(mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name);
+		childHolder.title.setImageResource(ResourceMapper.getResource(arg0, arg1).getChildDrawable()); // Text(mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name);
 		
 		childHolder.title.setOnClickListener(new OnClickListener() {
 			
@@ -129,15 +131,17 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 					
 					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
 					
-					((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
+					
+					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
+					
 					
 				}
 				else{
 					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
 					((MainActivity)mContext).level =  Mapper.getLevel(s);
 				}
-				
-				slected = R.drawable.group_up;
+				selected = ResourceMapper.getResource(arg0, arg1);
+				//slected = R.drawable.group_up;
 			}
 		});
 		
@@ -180,13 +184,14 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 			groupHolder = (GroupHolder) arg2.getTag();
 		}
 		if (groupStatus[arg0] == 0) {
-			groupHolder.img.setImageResource(slected);
+			groupHolder.img.setImageResource(R.drawable.group_down);
 		} else {
-			groupHolder.img.setImageResource(slected);
+			groupHolder.img.setImageResource(R.drawable.group_up);
 		}
-		groupHolder.title.setImageResource(slected);
+		if(selected.getParent() == arg0)
+		groupHolder.title.setImageResource(selected.getParentDrawable());
 		
-		slected = R.drawable.group_down;
+		//slected = R.drawable.lvl_a;
 
 		return arg2;
 	}
@@ -197,7 +202,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 	}
 
 	class ChildHolder {
-		TextView title;
+		ImageView title;
 	}
 
 	public boolean hasStableIds() {

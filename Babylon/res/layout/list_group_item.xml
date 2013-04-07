@@ -15,14 +15,15 @@
         android:clickable="true" >
 
 
-        <TextView
+        <ImageView
             android:id="@+id/item_title"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dip"
-            android:layout_marginLeft="15dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="8dip"
             android:focusable="false"
-            style="@style/textManji" />
+             />
 
     </LinearLayout>
 

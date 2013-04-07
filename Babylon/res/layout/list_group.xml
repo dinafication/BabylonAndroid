@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical" 
      android:focusable="false">
+     
+     
 
     <ImageView
         android:id="@+id/tag_img"
@@ -12,7 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
          android:focusable="false"
-        android:layout_marginRight="10dip" />
+        android:layout_marginLeft="2dip" />
 
     <ImageView
         android:id="@+id/group_title"

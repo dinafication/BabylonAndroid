@@ -174,8 +174,9 @@ public class MainFragment extends Fragment{
 					if(lastExpandedGroupIndx < 5 && lastExpandedGroupIndx  != groupPosition){
 						
 						mExpandableListView.collapseGroup(lastExpandedGroupIndx);
-						
+						adapter.groupStatus[groupPosition] = 0;						
 					}
+					adapter.groupStatus[groupPosition] = 1;
 					
 					lastExpandedGroupIndx = groupPosition;
 				}
