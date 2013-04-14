@@ -3,12 +3,12 @@ package nepal.dina.babylon;
 public class ResourceMapper {
 	
 	public enum Resource{
-		LNG(1,66, R.drawable.lvl4, R.drawable.lvl4), LNG_GER(0,0, R.drawable.lvl4, R.drawable.german_c2), 
-		LNG_FR(0,1, R.drawable.lvl4, R.drawable.french_c2), LNG_ITA(0,2, R.drawable.lvl4, R.drawable.italiah_c2),
-		LNG_ESP(0,3, R.drawable.lvl4, R.drawable.spanish_c2), 
-		LVL(1, 66, R.drawable.lvl4, R.drawable.lvl4), LVL_E(1,0, R.drawable.lvl_e, R.drawable.lvl_ec2),
-		LVL_PI(1,1, R.drawable.lvl_pi, R.drawable.lvl_pic2), LVL_I(1,2, R.drawable.lvl_i, R.drawable.lvl_ic2), 
-		LVL_UI(1,3, R.drawable.lvl_ui, R.drawable.lvl_uic2), LVL_A(1,4, R.drawable.lvl_a, R.drawable.lvl_ac2);
+		LNG(0,66, R.drawable.lng2, R.drawable.lng2), LNG_GER(0,0, R.drawable.lng2_ger, R.drawable.german_c2), 
+		LNG_FR(0,1, R.drawable.lng2_fer, R.drawable.french_c2), LNG_ITA(0,2, R.drawable.lng2_ita, R.drawable.italiah_c2),
+		LNG_ESP(0,3, R.drawable.lng2_spa, R.drawable.spanish_c2), 
+		LVL(1, 66, R.drawable.lvl3, R.drawable.lvl3), LVL_E(1,0, R.drawable.lvl3e, R.drawable.lvl_ec2),
+		LVL_PI(1,1, R.drawable.lvl5pi, R.drawable.lvl_pic2), LVL_I(1,2, R.drawable.lvl5i, R.drawable.lvl_ic2), 
+		LVL_UI(1,3, R.drawable.lvl5ui, R.drawable.lvl_uic2), LVL_A(1,4, R.drawable.lvl3a, R.drawable.lvl_ac2);
 		
 		private int parent;
 		private int child;

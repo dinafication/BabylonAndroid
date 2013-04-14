@@ -35,7 +35,8 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 	
 	public String level;
 	public String language;
-	private Resource selected;
+	private Resource selectedLvl;
+	private Resource selectedLng;
 	
 	
 
@@ -49,7 +50,8 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 
 		setListEvent();
 		
-		selected = Resource.LVL;
+		selectedLvl = Resource.LVL;
+		selectedLng = Resource.LNG;
 		
 	}
 
@@ -122,29 +124,7 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 			
 			@Override
 			public void onClick(View v) {
-				mExpandableListView.collapseGroup(arg0);
-				//TODO
-				if(arg0==0){
-					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
-					((MainActivity)mContext).language = Mapper.getLanguage(s);
-					
-					//((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
-					
-					//((RelativeLayout) getGroupView(0, true, null, null)).setBackgroundResource(R.drawable.lng_btn1_bck);
-					
-					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
-					
-					
-					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
-					
-					
-				}
-				else{
-					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
-					((MainActivity)mContext).level =  Mapper.getLevel(s);
-				}
-				selected = ResourceMapper.getResource(arg0, arg1);
-				//slected = R.drawable.group_up;
+				handleOnChildClick(arg0, arg1);
 				
 			}
 		});
@@ -152,36 +132,44 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 		childHolder.title.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				mExpandableListView.collapseGroup(arg0);
-				//TODO
-				if(arg0==0){
-					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
-					((MainActivity)mContext).language = Mapper.getLanguage(s);
-					
-					//((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
-					
-					//((RelativeLayout) getGroupView(0, true, null, null)).setBackgroundResource(R.drawable.lng_btn1_bck);
-					
-					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
-					
-					
-					//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
-					
-					
-				}
-				else{
-					String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
-					((MainActivity)mContext).level =  Mapper.getLevel(s);
-				}
-				selected = ResourceMapper.getResource(arg0, arg1);
-				//slected = R.drawable.group_up;
+				handleOnChildClick(arg0, arg1);
 			}
 		});
 		
 		return arg3;
 	}
 	
-	
+	private void handleOnChildClick(final int arg0, final int arg1){
+		mExpandableListView.collapseGroup(arg0);
+		//TODO
+		if(arg0==0){
+			String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+			((MainActivity)mContext).language = Mapper.getLanguage(s);
+			
+			//((GroupEntity)mExpandableListView.getItemAtPosition(0)).Name = "novo";
+			
+			//((RelativeLayout) getGroupView(0, true, null, null)).setBackgroundResource(R.drawable.lng_btn1_bck);
+			
+			//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).img.setBackgroundResource(R.drawable.lng_btn1_bck);// = (ImageView) arg2.findViewById(R.id.tag_img);
+			
+			
+			//((GroupHolder)((RelativeLayout) getGroupView(0, true, null, null)).getTag()).title.setImageResource(slected);
+			
+			
+		}
+		else{
+			String s =  mGroupCollection.get(arg0).GroupItemCollection.get(arg1).Name;
+			((MainActivity)mContext).level =  Mapper.getLevel(s);
+		}
+		
+		if(selectedLvl.getParent() == arg0){
+			selectedLvl = ResourceMapper.getResource(arg0, arg1);
+		}
+		if(selectedLng.getParent() == arg0){
+			selectedLng = ResourceMapper.getResource(arg0, arg1);
+		}
+		//slected = R.drawable.group_up;
+	}
 
 	public int getChildrenCount(int arg0) {
 		// TODO Auto-generated method stub
@@ -221,11 +209,12 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 		} else {
 			groupHolder.img.setImageResource(R.drawable.group_up);
 		}
-		if(selected.getParent() == arg0)
-		groupHolder.title.setImageResource(selected.getParentDrawable());
+		if(selectedLvl.getParent() == arg0)
+		groupHolder.title.setImageResource(selectedLvl.getParentDrawable());
 		
-		//slected = R.drawable.lvl_a;
-
+		if(selectedLng.getParent() == arg0)
+			groupHolder.title.setImageResource(selectedLng.getParentDrawable());
+		
 		return arg2;
 	}
 
