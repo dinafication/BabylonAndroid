@@ -18,6 +18,7 @@ import nepal.dina.babylon.data.DataBaseHelper;
 import nepal.dina.babylon.data.Question;
 import nepal.dina.babylon.data.QuestionGenerator;
 import nepal.dina.babylon.data.SmallQuestion;
+import nepal.dina.babylon.dialogs.OneBtnDialog;
 import nepal.dina.babylon.expandableList.ExpandableListAdapter;
 import nepal.dina.babylon.expandableList.GroupEntity;
 import nepal.dina.babylon.expandableList.GroupEntity.GroupItemEntity;
@@ -30,8 +31,11 @@ import nepal.dina.babylon.play.PlayFragment;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -41,6 +45,7 @@ import android.text.style.SuperscriptSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -177,11 +182,25 @@ public class MainActivity extends SherlockFragmentActivity {
 
 
 	public void btnPlayOnClck(View view) {
+	
+		if(language == null || level == null){
+			// TODO
+			FragmentManager fm = getSupportFragmentManager();
+			OneBtnDialog testDialog = new OneBtnDialog();
+	        testDialog.show(fm, "not_selected");
+	        
+	        
+	       
+		}
+		else{
+			fetchQuestions();
+			getSupportActionBar().selectTab(play);
+		}
 
-		fetchQuestions();
-		getSupportActionBar().selectTab(play);
 
 	}
+	
+	
 
 	public void onClckShow(View view) {
 

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.content.Context;
 import android.database.SQLException;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -203,7 +204,6 @@ public class MainFragment extends Fragment{
 			});
 	
 	  }
+	 
 	  
-
-
 }
