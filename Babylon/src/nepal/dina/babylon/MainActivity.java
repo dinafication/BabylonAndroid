@@ -23,7 +23,7 @@ import nepal.dina.babylon.expandableList.ExpandableListAdapter;
 import nepal.dina.babylon.expandableList.GroupEntity;
 import nepal.dina.babylon.expandableList.GroupEntity.GroupItemEntity;
 import nepal.dina.babylon.listeners.MainTabLsn;
-import nepal.dina.babylon.listeners.PlayTabLsn;
+import nepal.dina.babylon.listeners.MyTabLsn;
 import nepal.dina.babylon.nexts.CollectionPagerAdapter;
 import nepal.dina.babylon.nexts.ObjectFragment;
 import nepal.dina.babylon.play.PlayFragment;
@@ -40,7 +40,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.text.style.SuperscriptSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -76,8 +75,9 @@ public class MainActivity extends SherlockFragmentActivity {
 	MainFragment mainFragment;
 
 	Tab main;
-	Tab play;
+	Tab my;
 	Tab stats;
+	Tab help;
 	
 	public  String language;
 	public  String level;
@@ -118,15 +118,22 @@ public class MainActivity extends SherlockFragmentActivity {
 		ab.addTab(main);
 		ab.selectTab(main);
 
-		play = ab.newTab().setText("play");
-		play.setTabListener(new PlayTabLsn<PlayFragment>(this, "tag",
-				PlayFragment.class));
-//		ab.addTab(play);
-
-		stats = ab.newTab().setText("statistics");
+		my = ab.newTab().setText("MY");
+		my.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
+				StatsFragment.class));
+//		TODO rename in myFragment
+		ab.addTab(my);
+		
+		stats = ab.newTab().setText("%");
 		stats.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		ab.addTab(stats);
+		
+		help = ab.newTab().setText("HELP");
+		help.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
+				StatsFragment.class));
+//		TODO rename in myFragment
+		ab.addTab(help);
 
 		try {
 			myDbHelper = new DataBaseHelper(this);

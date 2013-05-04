@@ -18,7 +18,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class PlayTabLsn<T extends Fragment> implements TabListener {
+public class MyTabLsn<T extends Fragment> implements TabListener {
 	
 	 	private Fragment mFragment;
 	    private final Activity mActivity;
@@ -32,7 +32,7 @@ public class PlayTabLsn<T extends Fragment> implements TabListener {
 	      * @param tag  The identifier tag for the fragment
 	      * @param clz  The fragment's Class, used to instantiate the fragment
 	      */
-	    public PlayTabLsn(Activity activity, String tag, Class<T> clz) {
+	    public MyTabLsn(Activity activity, String tag, Class<T> clz) {
 	        mActivity = activity;
 	        mTag = tag;
 	        mClass = clz;
