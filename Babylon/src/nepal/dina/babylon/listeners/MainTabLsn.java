@@ -60,8 +60,7 @@ public class MainTabLsn<T extends Fragment> implements TabListener{
 	    }
 
 	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	        // User selected the already selected tab. Usually do nothing.
-	    	// TODO digni main tab
+	        onHome(tab, ft);
 	    }
 	    
 	    public void onHome(Tab tab, FragmentTransaction ft){

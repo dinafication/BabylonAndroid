@@ -118,19 +118,19 @@ public class MainActivity extends SherlockFragmentActivity {
 		ab.selectTab(main);
 
 		my = ab.newTab().setText("MY");
-		my.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
+		my.setTabListener(new MyTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(my);
 
 		stats = ab.newTab().setText("%");
-		stats.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
+		stats.setTabListener(new MyTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		ab.addTab(stats);
 
 		help = ab.newTab().setText("HELP");
-		help.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
-				StatsFragment.class));
+		help.setTabListener(new MyTabLsn<HelpFragment>(this, "tag",
+				HelpFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(help);
 
