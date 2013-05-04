@@ -29,7 +29,7 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 
 	private Context mContext;
-	private ExpandableListView mExpandableListView;
+	public ExpandableListView mExpandableListView;
 	private List<GroupEntity> mGroupCollection;
 	public int[] groupStatus;
 	
@@ -54,6 +54,12 @@ public class ExpandableListAdapter extends  BaseExpandableListAdapter{
 		selectedLng = Resource.LNG;
 		
 	}
+	
+	public void setmExpandableListView(ExpandableListView mExpandableListView) {
+		this.mExpandableListView = mExpandableListView;
+		setListEvent();
+	}
+
 
 	private void setListEvent() {
 

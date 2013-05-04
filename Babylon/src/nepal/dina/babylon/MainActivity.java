@@ -82,6 +82,8 @@ public class MainActivity extends SherlockFragmentActivity {
 	public  String language;
 	public  String level;
 	
+	private MainTabLsn<MainFragment> mainTabLsn;
+	
 	
 
 	@Override
@@ -109,16 +111,17 @@ public class MainActivity extends SherlockFragmentActivity {
 
 		// action bar
 		com.actionbarsherlock.app.ActionBar ab = getSupportActionBar();
-		main = ab.newTab().setText("main");
-		main.setTabListener(new MainTabLsn<MainFragment>(this, "tag",
-				MainFragment.class));
+		main = ab.newTab().setText("Home");
+		mainTabLsn = new MainTabLsn<MainFragment>(this, "tag",
+				MainFragment.class);
+		main.setTabListener(mainTabLsn);
 		ab.addTab(main);
 		ab.selectTab(main);
 
 		play = ab.newTab().setText("play");
 		play.setTabListener(new PlayTabLsn<PlayFragment>(this, "tag",
 				PlayFragment.class));
-		ab.addTab(play);
+//		ab.addTab(play);
 
 		stats = ab.newTab().setText("statistics");
 		stats.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
@@ -188,13 +191,15 @@ public class MainActivity extends SherlockFragmentActivity {
 			FragmentManager fm = getSupportFragmentManager();
 			OneBtnDialog testDialog = new OneBtnDialog();
 	        testDialog.show(fm, "not_selected");
-	        
-	        
 	       
 		}
 		else{
 			fetchQuestions();
-			getSupportActionBar().selectTab(play);
+			
+			FragmentManager fm = getSupportFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			mainTabLsn.onPlay(main, ft);
+			ft.commit();
 		}
 
 
