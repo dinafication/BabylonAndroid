@@ -23,7 +23,7 @@ import nepal.dina.babylon.expandableList.ExpandableListAdapter;
 import nepal.dina.babylon.expandableList.GroupEntity;
 import nepal.dina.babylon.expandableList.GroupEntity.GroupItemEntity;
 import nepal.dina.babylon.listeners.MainTabLsn;
-import nepal.dina.babylon.listeners.MyTabLsn;
+import nepal.dina.babylon.listeners.PlainTabLsn;
 import nepal.dina.babylon.nexts.CollectionPagerAdapter;
 import nepal.dina.babylon.nexts.ObjectFragment;
 import nepal.dina.babylon.play.PlayFragment;
@@ -118,18 +118,18 @@ public class MainActivity extends SherlockFragmentActivity {
 		ab.selectTab(main);
 
 		my = ab.newTab().setText("MY");
-		my.setTabListener(new MyTabLsn<StatsFragment>(this, "tag",
+		my.setTabListener(new PlainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(my);
 
 		stats = ab.newTab().setText("%");
-		stats.setTabListener(new MyTabLsn<StatsFragment>(this, "tag",
+		stats.setTabListener(new PlainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		ab.addTab(stats);
 
 		help = ab.newTab().setText("HELP");
-		help.setTabListener(new MyTabLsn<HelpFragment>(this, "tag",
+		help.setTabListener(new PlainTabLsn<HelpFragment>(this, "tag",
 				HelpFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(help);
