@@ -15,8 +15,12 @@ public class MainTabLsn<T extends Fragment> implements TabListener{
 	    private final String mTag;
 	    private final Class<T> mClass;
 	    
-	    private Fragment mFragmentPly;
+	    private PlayFragment mFragmentPly;
 	    private Fragment selected;
+	    
+	    public Fragment getSelectedfragment(){
+	    	return selected;
+	    }
 
 	    /** Constructor used each time a new tab is created.
 	      * @param activity  The host Activity, used to instantiate the fragment
@@ -88,7 +92,7 @@ public class MainTabLsn<T extends Fragment> implements TabListener{
 	        	
 	        	
 	            // If not, instantiate and add it to the activity
-	        	mFragmentPly = Fragment.instantiate(mActivity, PlayFragment.class.getName());
+	        	mFragmentPly = (PlayFragment) Fragment.instantiate(mActivity, PlayFragment.class.getName());
 	            ft.add(android.R.id.content, mFragmentPly, mTag);
 	        } else {
 	            // If it exists, simply attach it in order to show it

@@ -41,6 +41,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.style.SuperscriptSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -78,13 +79,11 @@ public class MainActivity extends SherlockFragmentActivity {
 	Tab my;
 	Tab stats;
 	Tab help;
-	
-	public  String language;
-	public  String level;
-	
+
+	public String language;
+	public String level;
+
 	private MainTabLsn<MainFragment> mainTabLsn;
-	
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,24 +120,24 @@ public class MainActivity extends SherlockFragmentActivity {
 		my = ab.newTab().setText("MY");
 		my.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
-//		TODO rename in myFragment
+		// TODO rename in myFragment
 		ab.addTab(my);
-		
+
 		stats = ab.newTab().setText("%");
 		stats.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
 		ab.addTab(stats);
-		
+
 		help = ab.newTab().setText("HELP");
 		help.setTabListener(new MainTabLsn<StatsFragment>(this, "tag",
 				StatsFragment.class));
-//		TODO rename in myFragment
+		// TODO rename in myFragment
 		ab.addTab(help);
 
 		try {
 			myDbHelper = new DataBaseHelper(this);
 			myDbHelper.createDataBase();
-			//fetchQuestions();
+			// fetchQuestions();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -146,73 +145,89 @@ public class MainActivity extends SherlockFragmentActivity {
 		}
 
 	}
-	
-	
-//	@Override
-//	public void onStart() {
-//		// TODO Auto-generated method stub
-//		super.onStart();
-//		  
-//		Spinner lng = (Spinner) findViewById(R.id.lng);
-//		lng.setOnItemSelectedListener(new OnItemSelectedListener() {
-//
-//			@Override
-//			public void onItemSelected(AdapterView<?> arg0, View arg1,
-//					int arg2, long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onNothingSelected(AdapterView<?> arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//		addListenerOnSpinnerItemSelection();
-//	}
-//
-//
-//	private void addListenerOnSpinnerItemSelection() {
-//		
-//		
-////		Spinner spinner = (Spinner) findViewById(R.id.lng);
-////		spinner.setSelection(1);
-//		lng.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//
-//	}
 
+	// @Override
+	// public void onStart() {
+	// // TODO Auto-generated method stub
+	// super.onStart();
+	//
+	// Spinner lng = (Spinner) findViewById(R.id.lng);
+	// lng.setOnItemSelectedListener(new OnItemSelectedListener() {
+	//
+	// @Override
+	// public void onItemSelected(AdapterView<?> arg0, View arg1,
+	// int arg2, long arg3) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void onNothingSelected(AdapterView<?> arg0) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	// });
+	// addListenerOnSpinnerItemSelection();
+	// }
+	//
+	//
+	// private void addListenerOnSpinnerItemSelection() {
+	//
+	//
+	// // Spinner spinner = (Spinner) findViewById(R.id.lng);
+	// // spinner.setSelection(1);
+	// lng.setOnItemClickListener(new OnItemClickListener() {
+	//
+	// @Override
+	// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+	// long arg3) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	// });
+	//
+	// }
+
+	@Override
+	public void onBackPressed() {
+		// ako si unutar playa onda samo treba home
+		
+		if(mainTabLsn.getSelectedfragment().getClass().equals(PlayFragment.class)){
+			FragmentManager fm = getSupportFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			mainTabLsn.onHome(main, ft);
+			ft.commit();
+		}
+		else{
+			super.onBackPressed();
+		}
+		
+		
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		return super.onKeyDown(keyCode, event);
+	}
 
 	public void btnPlayOnClck(View view) {
-	
-		if(language == null || level == null){
+
+		if (language == null || level == null) {
 			// TODO
 			FragmentManager fm = getSupportFragmentManager();
 			OneBtnDialog testDialog = new OneBtnDialog();
-	        testDialog.show(fm, "not_selected");
-	       
-		}
-		else{
+			testDialog.show(fm, "not_selected");
+
+		} else {
 			fetchQuestions();
-			
+
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
 			mainTabLsn.onPlay(main, ft);
 			ft.commit();
 		}
 
-
 	}
-	
-	
 
 	public void onClckShow(View view) {
 
@@ -233,7 +248,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	public void instantiateQuestion() {
 
-		//fetchQuestions();
+		// fetchQuestions();
 		String s = ret.get(numAll).getQ();
 		((TextView) findViewById(R.id.question)).setText(s);
 
@@ -257,12 +272,10 @@ public class MainActivity extends SherlockFragmentActivity {
 	public void fetchQuestions() {
 
 		myDbHelper.openDataBase();
-		
-		
-		ret = myDbHelper.getQuestions(language,level, "100");
-		
+
+		ret = myDbHelper.getQuestions(language, level, "100");
+
 		myDbHelper.closeDataBase();
 	}
-	
 
 }

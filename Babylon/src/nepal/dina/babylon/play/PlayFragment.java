@@ -9,6 +9,8 @@ import nepal.dina.babylon.data.DataBaseHelper;
 import nepal.dina.babylon.data.Question;
 import nepal.dina.babylon.data.QuestionGenerator;
 import nepal.dina.babylon.data.SmallQuestion;
+import nepal.dina.babylon.dialogs.OneBtnDialog;
+import nepal.dina.babylon.dialogs.TwoBtnsDialog;
 import nepal.dina.babylon.expandableList.ExpandableListAdapter;
 import nepal.dina.babylon.expandableList.GroupEntity;
 import nepal.dina.babylon.expandableList.GroupEntity.GroupItemEntity;
@@ -30,13 +32,20 @@ import android.support.v4.app.FragmentTransaction;
 public class PlayFragment extends Fragment {
 
 
+	private View view;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
+		if(view != null){
+			// TODO continue?
+			FragmentManager fm = getActivity().getSupportFragmentManager();
+			TwoBtnsDialog testDialog = new TwoBtnsDialog();
+	        testDialog.show(fm, "not_selected");
+		}
 
-		View view = inflater.inflate(R.layout.memo_question, container, false);
+		view = inflater.inflate(R.layout.memo_question, container, false);
 		
 
 		return view;
