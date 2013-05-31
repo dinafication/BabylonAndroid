@@ -6,6 +6,7 @@ import java.util.List;
 public class GroupEntity {
 	public String Name;
 	public List<GroupItemEntity> GroupItemCollection;
+	
 
 	public GroupEntity()
 	{
@@ -17,5 +18,7 @@ public class GroupEntity {
 	public class GroupItemEntity
 	{
 		public String Name;
+
+		public String note;
 	}
 }

@@ -15,6 +15,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 
 import nepal.dina.babylon.data.DataBaseHelper;
+import nepal.dina.babylon.data.MyGroup;
 import nepal.dina.babylon.data.Question;
 import nepal.dina.babylon.data.QuestionGenerator;
 import nepal.dina.babylon.data.SmallQuestion;
@@ -34,6 +35,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -44,6 +46,7 @@ import android.text.style.SuperscriptSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -59,6 +62,7 @@ import android.widget.Toast;
 import android.widget.ImageButton;
 
 import nepal.dina.babylon.listeners.CustomOnItemSelectedListener;
+import nepal.dina.babylon.my.MyFragment;
 
 public class MainActivity extends SherlockFragmentActivity {
 
@@ -118,9 +122,8 @@ public class MainActivity extends SherlockFragmentActivity {
 		ab.selectTab(main);
 
 		my = ab.newTab().setText("MY");
-		my.setTabListener(new PlainTabLsn<StatsFragment>(this, "tag",
-				StatsFragment.class));
-		// TODO rename in myFragment
+		my.setTabListener(new PlainTabLsn<MyFragment>(this, "tag",
+				MyFragment.class));
 		ab.addTab(my);
 
 		stats = ab.newTab().setText("%");
@@ -133,6 +136,8 @@ public class MainActivity extends SherlockFragmentActivity {
 				HelpFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(help);
+		
+		// help.se
 
 		try {
 			myDbHelper = new DataBaseHelper(this);
@@ -238,7 +243,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		((Button) findViewById(R.id.btnShow)).setClickable(false);
 
 		((ImageButton) findViewById(R.id.btnKrivo)).setVisibility(View.VISIBLE);
-		((Button) findViewById(R.id.btnTocno)).setVisibility(View.VISIBLE);
+		((ImageButton) findViewById(R.id.btnTocno)).setVisibility(View.VISIBLE);
 	}
 
 	private void enableShow() {
@@ -253,7 +258,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		((TextView) findViewById(R.id.question)).setText(s);
 
 		((ImageButton) findViewById(R.id.btnKrivo)).setVisibility(View.GONE);
-		((Button) findViewById(R.id.btnTocno)).setVisibility(View.GONE);
+		((ImageButton) findViewById(R.id.btnTocno)).setVisibility(View.GONE);
 
 		enableShow();
 	}
@@ -278,4 +283,15 @@ public class MainActivity extends SherlockFragmentActivity {
 		myDbHelper.closeDataBase();
 	}
 
+
+	// iz baze izvuce Moje rijeci
+	public ArrayList<MyGroup> getMyWords(){
+		
+		myDbHelper.openDataBase();
+
+		ArrayList<MyGroup> groups  = myDbHelper.getMyGroups();
+
+		myDbHelper.closeDataBase();
+		return groups;
+	}
 }

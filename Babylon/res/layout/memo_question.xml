@@ -14,15 +14,16 @@
         android:text="word1"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnTocno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="60dp"
-         android:layout_marginLeft="60dp"
-        android:text="Tocno"
+         android:layout_marginLeft="40dp"
+         android:background="#000000"
+        android:src="@drawable/true7"
         android:onClick="onClckTocno"
          />
 

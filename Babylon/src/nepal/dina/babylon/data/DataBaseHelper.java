@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import nepal.dina.babylon.WordsMapper;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -23,6 +25,58 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	private SQLiteDatabase myDataBase;
 
 	private final Context myContext;
+	
+	
+	public ArrayList<Pair<String, String>> getMyWordss(String id){
+
+		Cursor c = myDataBase.query("myword", new String[]{"word", "note"}, "mygroup = " + id, null, null, null, null, "100");
+		ArrayList<Pair<String, String>> ret = new ArrayList<Pair<String, String>>();
+		
+		
+		if (c != null ) {
+		    if  (c.moveToFirst()) {
+		        do {
+		            String word = c.getString(c.getColumnIndex("word"));
+		            String note = c.getString(c.getColumnIndex("note"));
+		            
+		            Pair<String, String> p = new Pair<String, String>();
+		            p.first = word;
+		            p.second = note;
+		            
+		            ret.add(p);
+		            
+		        }while (c.moveToNext());
+		    }
+		}
+		c.close();
+		
+		return ret;
+	}
+	
+	public ArrayList<MyGroup> getMyGroups(){
+
+		Cursor c = myDataBase.query("mygroup", new String[]{"_id", "lng", "lvl"}, "", null, null, null, null, "100");
+		ArrayList<MyGroup> ret = new ArrayList<MyGroup>();
+		
+		
+		if (c != null ) {
+		    if  (c.moveToFirst()) {
+		        do {
+		            String id = c.getString(c.getColumnIndex("_id"));
+		            String lng = c.getString(c.getColumnIndex("lng"));
+		            String lvl = c.getString(c.getColumnIndex("lvl"));
+		             
+		            MyGroup mg = new MyGroup(id, WordsMapper.getGroupName(lng, lvl));
+		            mg.setWords(getMyWordss(id));
+		            ret.add(mg);
+		            
+		        }while (c.moveToNext());
+		    }
+		}
+		c.close();
+		
+		return ret;
+	}
 	
 	public ArrayList<SmallQuestion> getQuestions(String lng, String level, String num){
 
