@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <Button
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,7 +12,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
         android:text="word1"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+       android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:background="#000000"
+        android:onClick="onClckWord" />
 
     <ImageButton
         android:id="@+id/btnTocno"
@@ -23,7 +26,7 @@
         android:layout_marginBottom="60dp"
          android:layout_marginLeft="40dp"
          android:background="#000000"
-        android:src="@drawable/true7"
+        android:src="@drawable/true9"
         android:onClick="onClckTocno"
          />
 
@@ -39,7 +42,7 @@
         android:onClick="onClckShow"
         android:text="Show ?"
         android:textColor="#ffffff"
-        android:textSize="25dp" />
+        android:textSize="25dp"/>
 
     <ImageButton
         android:id="@+id/btnKrivo"
@@ -50,6 +53,6 @@
         android:layout_marginRight="24dp"
         android:background="#000000"
         android:onClick="onClckKrivo"
-        android:src="@drawable/w2" />
+        android:src="@drawable/w6" />
 
 </RelativeLayout>

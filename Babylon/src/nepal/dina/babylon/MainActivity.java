@@ -255,7 +255,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 		// fetchQuestions();
 		String s = ret.get(numAll).getQ();
-		((TextView) findViewById(R.id.question)).setText(s);
+		((Button) findViewById(R.id.question)).setText(s);
 
 		((ImageButton) findViewById(R.id.btnKrivo)).setVisibility(View.GONE);
 		((ImageButton) findViewById(R.id.btnTocno)).setVisibility(View.GONE);
