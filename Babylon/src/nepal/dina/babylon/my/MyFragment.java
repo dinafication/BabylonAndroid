@@ -1,6 +1,8 @@
 package nepal.dina.babylon.my;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import nepal.dina.babylon.MainActivity;
@@ -45,6 +47,8 @@ public class MyFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		onAttach(getActivity());
 
 		view = inflater.inflate(R.layout.fragment_my, container, false);
 		getActivity().setContentView(R.layout.main);
@@ -59,15 +63,18 @@ public class MyFragment extends Fragment{
 
 		mGroupCollection = new ArrayList<GroupEntity>();
 		
-		ArrayList<MyGroup> s = ((MainActivity)getActivity()).getMyWords();
+		HashSet<MyGroup> s = ((MainActivity)getActivity()).getMyWords();
 
 
 		GroupEntity ge = null;
 		GroupItemEntity gie = null;
-		for(int i = 0; i<s.size(); i++){
+		
+		Iterator<MyGroup> itr = s.iterator();
+		while(itr.hasNext()){
+			
+			MyGroup mg = itr.next();
 			
 			ge = new GroupEntity();
-			MyGroup mg = s.get(i);
 			ge.Name = mg.getName();
 			
 			ArrayList<Pair<String, String>> ws = mg.getWords();

@@ -5,7 +5,9 @@ import android.database.sqlite.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -31,8 +33,10 @@ import nepal.dina.babylon.play.PlayFragment;
 
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -43,6 +47,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.style.SuperscriptSpan;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,8 +59,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +74,12 @@ import nepal.dina.babylon.listeners.CustomOnItemSelectedListener;
 import nepal.dina.babylon.my.MyFragment;
 
 public class MainActivity extends SherlockFragmentActivity {
+	
+	@Override
+	protected void onDestroy() {
+		myDbHelper.closeDataBase();
+		super.onDestroy();
+	}
 
 	public static int num;
 
@@ -88,6 +103,7 @@ public class MainActivity extends SherlockFragmentActivity {
 	public String level;
 
 	private MainTabLsn<MainFragment> mainTabLsn;
+	private PopupWindow pwSaveNEdit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -136,12 +152,13 @@ public class MainActivity extends SherlockFragmentActivity {
 				HelpFragment.class));
 		// TODO rename in myFragment
 		ab.addTab(help);
-		
+
 		// help.se
 
 		try {
 			myDbHelper = new DataBaseHelper(this);
 			myDbHelper.createDataBase();
+			myDbHelper.openDataBase();
 			// fetchQuestions();
 
 		} catch (IOException e) {
@@ -196,19 +213,19 @@ public class MainActivity extends SherlockFragmentActivity {
 	@Override
 	public void onBackPressed() {
 		// ako si unutar playa onda samo treba home
-		
-		if(mainTabLsn.getSelectedfragment().getClass().equals(PlayFragment.class)){
+
+		if (mainTabLsn.getSelectedfragment().getClass()
+				.equals(PlayFragment.class)) {
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
 			mainTabLsn.onHome(main, ft);
 			ft.commit();
-		}
-		else{
+		} else {
 			super.onBackPressed();
 		}
-		
-		
+
 	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
@@ -263,35 +280,68 @@ public class MainActivity extends SherlockFragmentActivity {
 		enableShow();
 	}
 
+	public void onClckWord(View view) {
+		
+		LayoutInflater layoutInflater 
+	     = (LayoutInflater)getBaseContext()
+	      .getSystemService(LAYOUT_INFLATER_SERVICE); 
+		View popupView = layoutInflater.inflate(R.layout.popupsave, null);  
+		pwSaveNEdit = new PopupWindow(
+          popupView, 
+          LayoutParams.WRAP_CONTENT,  
+                LayoutParams.WRAP_CONTENT); 
+        
+		pwSaveNEdit.showAsDropDown(view, (int) (view.getWidth()+ 4), -1);
+	}
+	
+	
+	
+	public void clickSave(View view){
+		
+		
+		//myDbHelper.openDataBase();
+
+		myDbHelper.saveWord(((TextView)findViewById(R.id.question)).getText().toString(), 
+				((TextView)findViewById(R.id.btnShow)).getText().toString(),language, level);
+
+		//myDbHelper.closeDataBase();
+		
+		dismissPopUp();
+	}
+	
+
+	private void dismissPopUp() {
+		if(pwSaveNEdit != null)pwSaveNEdit.dismiss();
+		
+	}
+
 	public void onClckKrivo(View view) {
 
 		instantiateQuestion();
 	}
 
+	
 	public void onClckTocno(View view) {
 
 		numRight++;
 		instantiateQuestion();
 	}
 
+	
 	public void fetchQuestions() {
 
-		myDbHelper.openDataBase();
+		//myDbHelper.openDataBase();
 
 		ret = myDbHelper.getQuestions(language, level, "100");
 
-		myDbHelper.closeDataBase();
+		//myDbHelper.closeDataBase();
 	}
 
-
 	// iz baze izvuce Moje rijeci
-	public ArrayList<MyGroup> getMyWords(){
-		
-		myDbHelper.openDataBase();
+	public HashSet<MyGroup> getMyWords() {
 
-		ArrayList<MyGroup> groups  = myDbHelper.getMyGroups();
+		HashSet<MyGroup> groups = myDbHelper.getMyGroups();
 
-		myDbHelper.closeDataBase();
 		return groups;
 	}
 }

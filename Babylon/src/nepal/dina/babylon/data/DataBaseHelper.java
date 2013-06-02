@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import nepal.dina.babylon.WordsMapper;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -27,7 +30,62 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	private final Context myContext;
 	
 	
+	
+	public void saveWord(String word, String note, String lng, String lvl){
+		
+		//openDataBase();
+		//myDataBase.beginTransaction();
+		
+		// prvo provjeriti da li postoji ta grupa
+		Cursor c = myDataBase.query("mygroup", new String[]{"_id", }, "lvl = '" + lvl + "' and lng = '" + lng + "'",
+				 null, null, null, null, "100");
+		
+		String id = null;
+		if (c != null ) {
+		    if  (c.moveToFirst()) {
+		        do {
+		            id = c.getString(c.getColumnIndex("_id"));		            
+		        }while (c.moveToNext());
+		    }
+		}
+		c.close();
+		
+		// ako ne postoji, stvoriti
+		long success = -1;
+		if(id == null){
+			ContentValues cv = new ContentValues();
+			cv.put("lvl", lvl); // TODOs
+			cv.put("lng", lng);
+			success = myDataBase.insert("mygroup", null, cv);
+			
+			if(success == -1)return;
+		}
+		
+		//myDataBase.endTransaction();
+		//closeDataBase();
+		//openDataBase();
+		//myDataBase.beginTransaction();
+		
+		// dodati zapis u myword
+//		ContentValues cv = new ContentValues();
+//		cv.put("word", word);
+//		cv.put("mygroup", String.valueOf(success));
+//		//cv.put("note", note);
+//		success = myDataBase.insert("myword", null, cv);
+		
+		myDataBase.execSQL("INSERT INTO myword (word, mygroup, note) " +
+	    "VALUES ('" + word + "', " + new Long(success).intValue() + ", '" + note + "')");
+		
+		
+		//myDataBase.endTransaction();
+		//closeDataBase();
+		
+	}
+	
+	
 	public ArrayList<Pair<String, String>> getMyWordss(String id){
+		
+		//openDataBase();
 
 		Cursor c = myDataBase.query("myword", new String[]{"word", "note"}, "mygroup = " + id, null, null, null, null, "100");
 		ArrayList<Pair<String, String>> ret = new ArrayList<Pair<String, String>>();
@@ -50,13 +108,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		}
 		c.close();
 		
+		//closeDataBase();
+		
 		return ret;
 	}
 	
-	public ArrayList<MyGroup> getMyGroups(){
+	public HashSet<MyGroup> getMyGroups(){
+		//openDataBase();
+		
+		String selectionQuery = "select * from mygroup";
+		int i = myDataBase.rawQuery(selectionQuery, null).getCount();
+		 
 
 		Cursor c = myDataBase.query("mygroup", new String[]{"_id", "lng", "lvl"}, "", null, null, null, null, "100");
-		ArrayList<MyGroup> ret = new ArrayList<MyGroup>();
+		HashSet<MyGroup> ret = new HashSet<MyGroup>();
 		
 		
 		if (c != null ) {
@@ -66,19 +131,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		            String lng = c.getString(c.getColumnIndex("lng"));
 		            String lvl = c.getString(c.getColumnIndex("lvl"));
 		             
-		            MyGroup mg = new MyGroup(id, WordsMapper.getGroupName(lng, lvl));
-		            mg.setWords(getMyWordss(id));
-		            ret.add(mg);
+		            MyGroup mg = new MyGroup(id, lng, lvl);
+		            
+		            ArrayList<Pair<String, String>> ws = getMyWordss(id);
+		            if(ws.size()>0){
+		            	mg.setWords(ws);
+			            ret.add(mg);
+		            }
+		            
 		            
 		        }while (c.moveToNext());
 		    }
 		}
 		c.close();
 		
+		//closeDataBase();
+		
 		return ret;
 	}
 	
 	public ArrayList<SmallQuestion> getQuestions(String lng, String level, String num){
+		
+		//openDataBase();
 
 		Cursor c = myDataBase.query(lng, new String[]{"phrase1","phrase2"}, "level = '" + level + "'", null, null, null, null, num);
 		ArrayList<SmallQuestion> ret = new ArrayList<SmallQuestion>();
@@ -97,6 +171,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		}
 		c.close();
 		
+		//closeDataBase();
 		return ret;
 	}
 
@@ -122,7 +197,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	 * */
 	public void createDataBase() throws IOException {
 
-		boolean dbExist = checkDataBase();
+		boolean dbExist =  checkDataBase(); // false
 
 		if (dbExist) {
 			// do nothing - database already exist
@@ -133,7 +208,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			// of your application so we are gonna be able to overwrite that
 			// database with our database.
 			
-			this.getReadableDatabase().close();
+			this.getWritableDatabase().close();
 
 			try {
 
@@ -162,7 +237,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		try {
 			String myPath = DB_PATH + DB_NAME;
 			checkDB = SQLiteDatabase.openDatabase(myPath, null,
-					SQLiteDatabase.OPEN_READONLY);
+					SQLiteDatabase.OPEN_READWRITE);
 			
 			
 
@@ -216,7 +291,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		// Open the database
 		String myPath = DB_PATH + DB_NAME;
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null,
-				SQLiteDatabase.OPEN_READONLY);
+				SQLiteDatabase.OPEN_READWRITE);
 	}
 	
 	

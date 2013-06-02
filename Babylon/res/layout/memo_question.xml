@@ -37,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/question"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="70dp"
         android:background="#0000"
         android:onClick="onClckShow"
         android:text="Show ?"
